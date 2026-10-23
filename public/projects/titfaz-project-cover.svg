@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#10243B"/>
+  <path d="M0 530H1200" stroke="#54708F" stroke-opacity=".45"/>
+  <path d="M0 574H1200" stroke="#54708F" stroke-opacity=".3"/>
+  <path d="M0 618H1200" stroke="#54708F" stroke-opacity=".2"/>
+  <path d="M840 150V530M840 150H1070V530M840 220H1070M910 150V530M990 150V530M840 315H1070M840 410H1070" stroke="#9BB7D2" stroke-opacity=".42" stroke-width="3"/>
+  <path d="M752 530V238H828V530M734 238H852M770 238L780 198H800L810 238" stroke="#F5B447" stroke-width="5" stroke-linecap="square"/>
+  <path d="M710 530H1094M720 550H1084" stroke="#9BB7D2" stroke-opacity=".5" stroke-width="4"/>
+  <path d="M0 0H1200V675H0z" fill="url(#wash)"/>
+  <text x="82" y="122" fill="#9BB7D2" font-family="Arial, sans-serif" font-size="20" letter-spacing="5">PROJECT COVER · WEBSITE PREVIEW UNAVAILABLE</text>
+  <text x="80" y="390" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-2">Titfaz</text>
+  <text x="80" y="466" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-2">Construction</text>
+  <path d="M84 500H430" stroke="#F5B447" stroke-width="6"/>
+  <text x="84" y="551" fill="#C8D5E3" font-family="Arial, sans-serif" font-size="23" letter-spacing="2">BUILT WITH PURPOSE</text>
+  <defs>
+    <linearGradient id="wash" x1="112" y1="42" x2="940" y2="655" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2F6FED" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#10243B" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
