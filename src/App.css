@@ -1588,3 +1588,262 @@
   color: var(--navy);
   background: #fff;
 }
+
+.hero-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-highlights li {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 13px;
+  background: rgb(255 255 255 / 70%);
+}
+
+.hero-highlights strong {
+  color: var(--navy);
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-highlights span {
+  color: #687d97;
+  font-size: 10px;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.support-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #dce5f0;
+  border-radius: 13px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgb(21 48 82 / 4%);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.support-card:hover {
+  transform: translateY(-3px);
+  border-color: #b9ccee;
+  box-shadow: 0 14px 36px rgb(31 78 137 / 12%);
+}
+
+.support-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #71839a;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+}
+
+.support-code {
+  border-radius: 999px;
+  padding: 4px 9px;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+}
+
+.support-card h3,
+.ticket-flow h3,
+.remote-panel h3 {
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.support-card p {
+  flex: 1;
+  margin: 0;
+  color: #586b83;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.ticket-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  counter-reset: none;
+}
+
+.ticket-flow li {
+  position: relative;
+  padding: 26px 22px 6px 0;
+}
+
+.ticket-flow li::before {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  content: '';
+}
+
+.ticket-step {
+  display: block;
+  margin-bottom: 10px;
+  color: #71839a;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+}
+
+.ticket-flow h3 {
+  font-size: 17px;
+}
+
+.ticket-flow p {
+  margin: 8px 0 0;
+  color: #586b83;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.remote-panel {
+  display: grid;
+  grid-template-columns: 0.55fr 1.45fr;
+  gap: 30px;
+  margin-top: 56px;
+  border-radius: 14px;
+  padding: 30px;
+  color: #f8f8f4;
+  background: var(--navy);
+}
+
+.remote-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.remote-panel-heading .status-dot {
+  flex: 0 0 auto;
+  margin-top: 8px;
+  box-shadow: 0 0 0 4px rgb(47 111 237 / 30%);
+}
+
+.remote-panel h3 {
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.remote-notes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin: 0;
+}
+
+.remote-notes > div {
+  border-left: 1px solid rgb(255 255 255 / 17%);
+  padding-left: 16px;
+}
+
+.remote-notes dt {
+  margin-bottom: 8px;
+  color: #91b7ff;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+}
+
+.remote-notes dd {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.remote-notes strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.remote-notes span {
+  color: #b8c3d3;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.support-section .skills-intro,
+.approach-section .skills-intro {
+  align-items: end;
+  margin-bottom: 44px;
+}
+
+@media (max-width: 900px) {
+  .support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ticket-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .remote-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .support-grid,
+  .ticket-flow,
+  .remote-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .support-section .skills-intro,
+  .approach-section .skills-intro {
+    margin-bottom: 30px;
+  }
+
+  .ticket-flow li {
+    padding-right: 0;
+  }
+
+  .remote-panel {
+    margin-top: 40px;
+    padding: 24px 20px;
+  }
+
+  .remote-notes > div {
+    border-top: 1px solid rgb(255 255 255 / 17%);
+    border-left: 0;
+    padding: 16px 0 0;
+  }
+}

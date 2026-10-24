@@ -4,7 +4,6 @@ import './App.css'
 const currentYear = new Date().getFullYear()
 
 type Project = {
-  index: string
   name: string
   type: string
   description: string
@@ -16,91 +15,125 @@ type Project = {
   repoLabel?: string
   image?: string
   imageAlt?: string
-  imageSource?: string
 }
+
+const supportAreas = [
+  {
+    code: 'ACCOUNTS',
+    title: 'Sign-in & account access',
+    description:
+      'Password resets, locked accounts, group membership and permission changes, handled with the right identity checks.',
+    tools: ['Active Directory', 'Microsoft 365', 'Access control'],
+  },
+  {
+    code: 'M365',
+    title: 'Email, Teams & SharePoint',
+    description:
+      'Outlook profiles and mailbox issues, Teams calls and chat, SharePoint access and file sharing problems.',
+    tools: ['Outlook', 'Microsoft Teams', 'SharePoint'],
+  },
+  {
+    code: 'DESKTOP',
+    title: 'Windows & Linux desktops',
+    description:
+      'Slow or crashing PCs, software installs, updates and configuration on Windows 10/11 and Ubuntu.',
+    tools: ['Windows 10 / 11', 'Ubuntu Linux', 'Debugging'],
+  },
+  {
+    code: 'NETWORK',
+    title: 'Connectivity & printers',
+    description:
+      'No internet, Wi-Fi and LAN faults, shared printers and drives, worked through step by step with network diagnostics.',
+    tools: ['TCP/IP', 'LAN setup', 'Printer configuration'],
+  },
+  {
+    code: 'HARDWARE',
+    title: 'Hardware & peripherals',
+    description:
+      'Diagnosing faulty devices, monitors, keyboards and docks, and preparing machines for new users.',
+    tools: ['Hardware troubleshooting', 'Device setup'],
+  },
+  {
+    code: 'SECURITY',
+    title: 'Security & data recovery',
+    description:
+      'Antivirus checks, suspicious activity, firewall basics and restoring lost files from backup.',
+    tools: ['Antivirus tools', 'Firewall fundamentals', 'Backup & recovery'],
+  },
+]
+
+const ticketSteps = [
+  {
+    title: 'Listen & log',
+    description:
+      'Understand what the user was trying to do, capture the error, device and impact, and set clear expectations.',
+  },
+  {
+    title: 'Diagnose',
+    description:
+      'Reproduce the problem, check the obvious first, then narrow it down methodically instead of guessing.',
+  },
+  {
+    title: 'Resolve or escalate',
+    description:
+      'Fix it remotely where possible, or escalate with complete notes so nobody has to ask the user again.',
+  },
+  {
+    title: 'Document & follow up',
+    description:
+      'Confirm the fix with the user, record the steps taken and turn repeat issues into simple how-to guides.',
+  },
+]
+
+const remoteNotes = [
+  {
+    label: 'TIME ZONE',
+    value: 'UTC+2 · Harare (CAT)',
+    detail: 'A full working-day overlap with UK and European business hours.',
+  },
+  {
+    label: 'COMMUNICATION',
+    value: 'Teams, Outlook & email',
+    detail: 'Plain-language updates for users, precise technical notes for the team.',
+  },
+  {
+    label: 'DOCUMENTATION',
+    value: 'Written first',
+    detail: 'Clear ticket notes, step-by-step guides and handover summaries.',
+  },
+]
 
 const skills = [
   {
     number: '01',
-    title: 'Full stack development',
-    description: 'Building connected user experiences, application logic and APIs.',
+    title: 'Help desk & end-user support',
+    description: 'Day-to-day support that keeps people productive.',
     items: [
-      'React.js',
-      'Node.js',
-      'Express.js',
-      'REST APIs',
-      'Responsive web design',
-      'Frontend API integration',
-      'JWT authentication',
-      'Role-based access control',
+      'Helpdesk support',
+      'Remote desktop support',
+      'Hardware troubleshooting',
+      'Windows 10 / 11',
+      'Ubuntu Linux',
+      'Backup & recovery',
+      'User-focused support',
     ],
   },
   {
     number: '02',
-    title: 'Programming & mobile',
-    description: 'Languages and mobile tools for practical application development.',
+    title: 'Microsoft 365 & identity',
+    description: 'Workplace collaboration tools and user accounts.',
     items: [
-      'JavaScript',
-      'TypeScript',
-      'Python',
-      'Java',
-      'C#',
-      'Flutter',
-      'Cross-platform mobile',
-      'Mobile API integration',
-      'Mobile interfaces',
-    ],
-  },
-  {
-    number: '03',
-    title: 'Databases & AI integration',
-    description: 'Working with structured data and adding useful AI capabilities.',
-    items: [
-      'PostgreSQL',
-      'MySQL',
-      'SQL queries',
-      'Database design',
-      'Data modelling',
-      'AI API integration',
-      'AI-assisted data processing',
-    ],
-  },
-  {
-    number: '04',
-    title: 'Software engineering & tools',
-    description: 'Taking software from requirements through maintenance.',
-    items: [
-      'Git & GitHub',
-      'Object-oriented programming',
-      'Software design',
-      'Agile methodology',
-      'Software testing',
-      'Debugging',
-      'Deployment',
-      'Technical documentation',
-    ],
-  },
-  {
-    number: '05',
-    title: 'IT support & systems',
-    description: 'Supporting users, devices and common workplace systems.',
-    items: [
-      'Windows 10 / 11',
-      'Ubuntu Linux',
       'Microsoft 365',
       'Microsoft Teams',
       'Outlook & SharePoint',
       'Active Directory',
-      'Helpdesk support',
-      'Hardware troubleshooting',
-      'Remote desktop support',
-      'Backup & recovery',
+      'Role-based access control',
     ],
   },
   {
-    number: '06',
+    number: '03',
     title: 'Networking & security',
-    description: 'Foundational network setup, access control and system reliability.',
+    description: 'Foundational network setup, access control and reliability.',
     items: [
       'TCP/IP',
       'LAN setup',
@@ -109,200 +142,188 @@ const skills = [
       'Access control',
       'Firewall fundamentals',
       'Antivirus tools',
-      'Secure API integration',
     ],
   },
   {
-    number: '07',
-    title: 'Professional strengths',
-    description: 'A thoughtful, collaborative approach to solving technical problems.',
+    number: '04',
+    title: 'Web & application support',
+    description: 'Enough development depth to support and fix business apps.',
+    items: [
+      'JavaScript',
+      'TypeScript',
+      'React.js',
+      'Node.js',
+      'REST APIs',
+      'Python',
+      'Java',
+      'C#',
+      'Flutter',
+      'Deployment',
+    ],
+  },
+  {
+    number: '05',
+    title: 'Databases & data',
+    description: 'Reading, querying and maintaining structured data.',
+    items: ['PostgreSQL', 'MySQL', 'SQL queries', 'Database design', 'Data modelling'],
+  },
+  {
+    number: '06',
+    title: 'Ways of working',
+    description: 'How I approach problems and people.',
     items: [
       'Problem-solving',
-      'Analytical thinking',
       'Technical communication',
-      'Team collaboration',
+      'Technical documentation',
+      'Git & GitHub',
+      'Agile methodology',
       'Independent working',
-      'Adaptability',
-      'User-focused support',
+      'Team collaboration',
     ],
   },
 ]
 
 const projects: Project[] = [
   {
-    index: '01',
-    name: 'Mediscribe',
-    type: 'Telemedicine platform',
+    name: 'MediPrescribe & MediScribe',
+    type: 'Healthcare platforms',
     description:
-      'A telemedicine platform concept with database-backed functionality, JWT authentication and REST APIs for patient-doctor communication.',
-    stack: ['React.js', 'Node.js', 'PostgreSQL', 'JWT'],
-    image: '/projects/mediscribe-live.png',
-    imageAlt: 'MediPrescribe sign-in screen from the related healthcare app',
-    imageSource: 'Related healthcare app screenshot · eprescribe.netlify.app',
-    note: 'Project details from supplied CV',
-  },
-  {
-    index: '02',
-    name: 'MediPrescribe',
-    type: 'E-prescription platform',
-    description:
-      'An e-prescription platform featuring role-based access, patient records, audit trails and AI-assisted drug interaction validation.',
-    stack: ['React.js', 'Node.js', 'PostgreSQL', 'AI integration'],
+      'E-prescription and telemedicine platforms with role-based access, patient records, audit trails, JWT authentication and AI-assisted drug interaction checks.',
+    stack: ['React.js', 'Node.js', 'PostgreSQL', 'JWT', 'AI integration'],
     link: 'https://eprescribe.netlify.app',
-    linkLabel: 'Visit live project',
+    linkLabel: 'Live demo',
     repo: 'https://github.com/Ekeneji21/Mediscribe-',
-    repoLabel: 'GitHub repository',
+    repoLabel: 'GitHub',
     image: '/projects/mediprescribe.jpg',
     imageAlt: 'Screenshot of the MediPrescribe patient dashboard',
-    imageSource: 'Live project image · Crestline Systems',
-    note: 'Live demo supplied with CV',
+    note: 'Live demo',
   },
   {
-    index: '03',
+    name: 'Crestline Systems',
+    type: 'Software & IT services website',
+    description:
+      'A Zimbabwe-focused software and IT services website covering business applications, web development, AI, networking and support services.',
+    stack: ['Next.js', 'Vercel', 'DNS & domains'],
+    link: 'https://crestlinesystems.co.zw',
+    linkLabel: 'Visit site',
+    image: '/projects/crestline-site.png',
+    imageAlt: 'Crestline Systems website preview',
+    note: 'Live website',
+  },
+  {
     name: 'GreenToken',
     type: 'Environmental technology',
     description:
       'A carbon credit platform for issuing and tracking credits, with reporting for environmental impact analytics.',
     stack: ['React.js', 'Node.js'],
     link: 'https://apexmountaintechnologies.netlify.app',
-    linkLabel: 'Visit live project',
+    linkLabel: 'Live demo',
     image: '/projects/greentoken-live.png',
-    imageAlt: 'Screenshot of the GreenToken live sign-in page',
-    imageSource: 'Live website screenshot · apexmountaintechnologies.netlify.app',
-    note: 'Live demo supplied with CV',
+    imageAlt: 'Screenshot of the GreenToken sign-in page',
+    note: 'Live demo',
   },
   {
-    index: '04',
     name: 'AI-Based Credit Scoring System',
     type: 'Data-driven application',
     description:
       'A credit assessment application using data-driven scoring algorithms and structured database design.',
     stack: ['Python', 'PostgreSQL'],
     link: 'https://credit-score-lilac.vercel.app',
-    linkLabel: 'Visit live project',
+    linkLabel: 'Live demo',
     image: '/projects/credit-scoring-live.png',
     imageAlt: 'Screenshot of the Pamoja AI credit scoring dashboard',
-    imageSource: 'Live website screenshot · credit-score-lilac.vercel.app',
-    note: 'Live demo supplied with CV',
+    note: 'Live demo',
   },
   {
-    index: '05',
     name: 'CrestMart',
     type: 'Zimbabwe-focused marketplace',
     description:
-      'A marketplace prototype with product search, category browsing, cart and checkout flows, delivery zones, gift orders and seller pages. Payment options are simulated in this demo.',
+      'A marketplace prototype with product search, categories, cart and checkout flows, delivery zones, gift orders and seller pages.',
     stack: ['React', 'JavaScript', 'React Router'],
     repo: 'https://github.com/Ekeneji21/crestmart',
-    repoLabel: 'GitHub repository',
+    repoLabel: 'GitHub',
     image: '/projects/crestmart-live.png',
-    imageAlt: 'Screenshot of CrestMart running from its public GitHub repository',
-    imageSource: 'Local run of public GitHub project · github.com/Ekeneji21/crestmart',
-    note: 'Public GitHub repository',
+    imageAlt: 'Screenshot of the CrestMart storefront',
+    note: 'Open source',
   },
   {
-    index: '06',
     name: 'Agrotek19',
-    type: 'Agriculture dashboard prototype',
+    type: 'Agriculture dashboard',
     description:
       'A React and TypeScript application with farm, advisory, alerts, weather, marketplace and disease-detection screens, plus an API service module.',
     stack: ['React', 'TypeScript', 'API integration'],
     repo: 'https://github.com/Ekeneji21/Agrotek19',
-    repoLabel: 'GitHub repository',
+    repoLabel: 'GitHub',
     image: '/projects/agrotek-live.png',
-    imageAlt: 'Screenshot of AgriSense running from the Agrotek19 GitHub repository',
-    imageSource: 'Local run of public GitHub project · github.com/Ekeneji21/Agrotek19',
-    note: 'Public GitHub repository',
+    imageAlt: 'Screenshot of the AgriSense dashboard from Agrotek19',
+    note: 'Open source',
   },
   {
-    index: '07',
-    name: 'Crestline Systems',
-    type: 'Software & IT services website',
-    description:
-      'A Zimbabwe-focused software and IT services website featuring business applications, web development, AI, networking and support services.',
-    stack: ['Web development', 'Software', 'IT services'],
-    link: 'https://crestlinesystems.co.zw',
-    linkLabel: 'Visit live website',
-    image: '/projects/crestline-site.png',
-    imageAlt: 'Crestline Systems website social preview graphic',
-    imageSource: 'Live website preview · crestlinesystems.co.zw',
-    note: 'Live website',
-  },
-  {
-    index: '08',
     name: 'AgriSense Zimbabwe',
     type: 'Agriculture dashboard',
     description:
-      'A smart agriculture dashboard presented on Crestline Systems, with crop health, weather, disease detection, advisory and marketplace screens.',
+      'A smart agriculture dashboard with crop health, weather, disease detection, advisory and marketplace screens.',
     stack: ['React', 'Dashboard UI', 'Agriculture technology'],
     link: 'https://crestlinesystems.co.zw/agrisense',
     linkLabel: 'View project',
     image: '/projects/agrisense.jpg',
     imageAlt: 'Screenshot of the AgriSense Zimbabwe farmer dashboard',
-    imageSource: 'Live project image · Crestline Systems',
     note: 'Featured on Crestline Systems',
   },
   {
-    index: '09',
     name: 'AfriGenius STEM Academy',
     type: 'Education platform',
     description:
-      'A STEM academy website and learning portal presented on Crestline Systems, focused on coding, robotics, AI and hands-on learning.',
-    stack: ['Web development', 'Education technology', 'STEM'],
+      'A STEM academy website and learning portal focused on coding, robotics, AI and hands-on learning.',
+    stack: ['Web development', 'Education technology'],
     link: 'https://crestlinesystems.co.zw/afrigenius',
     linkLabel: 'View project',
     image: '/projects/afrigenius.jpg',
     imageAlt: 'Screenshot of the AfriGenius STEM Academy website',
-    imageSource: 'Live project image · Crestline Systems',
     note: 'Featured on Crestline Systems',
   },
   {
-    index: '10',
     name: 'New Dream Glass & Aluminium',
     type: 'Business website',
     description:
       'A live website for a glass and aluminium business, showcasing entrance doors, windows, shopfronts and partition work.',
-    stack: ['Business website', 'Product gallery', 'Responsive design'],
+    stack: ['Business website', 'Responsive design'],
     link: 'https://dreams-zeta-six.vercel.app/',
-    linkLabel: 'Visit live website',
+    linkLabel: 'Visit site',
     image: '/projects/new-dream-live.png',
-    imageAlt: 'Screenshot of the New Dream Glass & Aluminium live website',
-    imageSource: 'Live website screenshot · dreams-zeta-six.vercel.app',
+    imageAlt: 'Screenshot of the New Dream Glass & Aluminium website',
     note: 'Live website',
   },
   {
-    index: '11',
     name: 'Titfaz Construction',
     type: 'Construction website',
     description:
-      'A construction company website supplied as a live project link. A preview image could not be retrieved, so no substitute artwork is shown.',
-    stack: ['Construction', 'Business website'],
+      'A website for a Zimbabwean construction company, presenting its services and completed projects.',
+    stack: ['Business website', 'Responsive design'],
     link: 'https://titfazconstruction.co.zw',
-    linkLabel: 'Visit live website',
+    linkLabel: 'Visit site',
     image: '/projects/titfaz-project-cover.svg',
-    imageAlt: 'Illustrated project cover for Titfaz Construction; live site preview unavailable',
-    imageSource: 'Illustrated cover · live site blocks screenshot access',
-    note: 'Live link · preview unavailable',
+    imageAlt: 'Illustrated cover for the Titfaz Construction website',
+    note: 'Live website',
   },
 ]
 
-const services = [
-  'Full stack web development',
-  'Frontend development',
-  'Backend API development',
-  'Flutter mobile applications',
-  'Database design & integration',
-  'AI API integration',
-  'Website maintenance & bug fixes',
-  'IT support & troubleshooting',
-  'Basic network setup',
+const roles = [
+  'Remote help desk / service desk analyst',
+  'IT support technician',
+  'Desktop & end-user support',
+  'Microsoft 365 support',
+  'Technical support for web applications',
+  'Junior systems or network support',
+  'Freelance website maintenance & fixes',
 ]
 
 const coursework = [
-  'Software design & architecture',
-  'Web and mobile application development',
-  'Database systems',
   'Operating systems',
   'Networking & data communications',
+  'Database systems',
+  'Software design & architecture',
+  'Web and mobile application development',
   'Object-oriented programming',
   'Software project management',
   'Human-computer interaction',
@@ -373,17 +394,20 @@ function App() {
           <a href="#about" onClick={closeMenu}>
             About
           </a>
+          <a href="#support" onClick={closeMenu}>
+            Support
+          </a>
+          <a href="#approach" onClick={closeMenu}>
+            Approach
+          </a>
+          <a href="#skills" onClick={closeMenu}>
+            Toolkit
+          </a>
           <a href="#projects" onClick={closeMenu}>
             Projects
           </a>
-          <a href="#skills" onClick={closeMenu}>
-            Skills
-          </a>
-          <a href="#experience" onClick={closeMenu}>
-            Background
-          </a>
           <a className="nav-contact" href="#contact" onClick={closeMenu}>
-            Let&apos;s talk <ArrowIcon />
+            Hire me <ArrowIcon />
           </a>
         </nav>
       </header>
@@ -391,38 +415,49 @@ function App() {
       <main id="main">
         <section aria-labelledby="hero-title" className="hero-section" id="home">
           <div className="hero-copy">
-            <p className="eyebrow"><span className="status-dot" /> OPEN TO OPPORTUNITIES</p>
+            <p className="eyebrow"><span className="status-dot" /> AVAILABLE FOR REMOTE IT SUPPORT ROLES</p>
             <h1 id="hero-title">
               Ekeneji
               <br />
               <span>Tanaka Gomo.</span>
             </h1>
             <p className="hero-role">
-              Full Stack Developer <span>/</span> Software Engineer
-              <span>/</span> Mobile Developer
+              IT Support <span>/</span> Help Desk <span>/</span> Full Stack
+              Developer
             </p>
             <p className="hero-intro">
-              I build practical digital products—from responsive interfaces and
-              backend services to data-driven applications. I&apos;m a software
-              engineering student in Harare, Zimbabwe, ready to contribute and
-              keep growing.
+              I help people get back to work: troubleshooting Windows and
+              Microsoft 365, sorting out accounts, networks and devices, and
+              explaining every fix in plain language. Software engineering
+              student in Harare, working remotely in UTC+2.
             </p>
             <div className="hero-actions">
-              <a className="button button-dark" href="#projects">
-                Explore my work <ArrowIcon />
+              <a className="button button-dark" href="#contact">
+                Hire me remotely <ArrowIcon />
               </a>
               <a
                 className="button button-outline"
-                download="Ekeneji-Tanaka-Gomo-CV-preview.png"
                 href="/ekeneji-cv-preview.png"
-                title="Download the supplied CV screenshot as a PNG preview"
+                rel="noreferrer"
+                target="_blank"
               >
-                Download CV preview <span className="download-icon">↓</span>
+                View CV <span className="download-icon">↗</span>
               </a>
             </div>
-            <p className="cv-note">
-              PNG preview from the supplied image; request the PDF by email.
-            </p>
+            <ul aria-label="At a glance" className="hero-highlights">
+              <li>
+                <strong>Windows & M365</strong>
+                <span>Plus Active Directory</span>
+              </li>
+              <li>
+                <strong>Remote-first</strong>
+                <span>Remote desktop support</span>
+              </li>
+              <li>
+                <strong>UTC+2</strong>
+                <span>UK & EU hours overlap</span>
+              </li>
+            </ul>
             <div className="hero-socials">
               <a href="https://github.com/Ekeneji21" rel="noreferrer" target="_blank">
                 GitHub <span aria-hidden="true">↗</span>
@@ -446,13 +481,13 @@ function App() {
               <span>HARARE, ZW</span>
             </div>
             <div className="portrait-caption">
-              <span>SOFTWARE ENGINEERING STUDENT</span>
-              <strong>Thoughtful work. Practical solutions.</strong>
+              <span>IT SUPPORT · HELP DESK</span>
+              <strong>Calm, clear fixes that get people back to work.</strong>
             </div>
             <div className="hero-art-bottom">
               <div>
-                <span className="art-label">BASED IN</span>
-                <strong>Harare, Zimbabwe</strong>
+                <span className="art-label">WORKING</span>
+                <strong>Remotely · UTC+2</strong>
               </div>
               <span className="art-coordinate">OPEN TO OPPORTUNITIES</span>
             </div>
@@ -465,10 +500,10 @@ function App() {
         </section>
 
         <section aria-label="Areas of work" className="focus-strip">
-          <span>01 / WEB APPLICATIONS</span>
-          <span>02 / BACKEND &amp; API</span>
-          <span>03 / DATABASES</span>
-          <span>04 / IT SUPPORT</span>
+          <span>01 / HELP DESK SUPPORT</span>
+          <span>02 / MICROSOFT 365 &amp; ACCOUNTS</span>
+          <span>03 / NETWORK TROUBLESHOOTING</span>
+          <span>04 / WEB &amp; APP SUPPORT</span>
         </section>
 
         <section aria-labelledby="about-title" className="content-section about-section" id="about">
@@ -478,63 +513,172 @@ function App() {
           </div>
           <div className="about-grid">
             <h2 id="about-title">
-              Building a strong
+              Technical depth,
               <br />
-              <span>foundation in software.</span>
+              <span>human patience.</span>
             </h2>
             <div className="about-copy">
               <p>
                 I&apos;m a Year 3 Software Engineering student at the University
-                of Zimbabwe. My experience spans full stack application
-                development and hands-on IT support, from troubleshooting
-                workplace systems to building and deploying software.
+                of Zimbabwe with hands-on IT support experience: troubleshooting
+                workplace systems, supporting users and configuring networks,
+                alongside building and deploying web applications.
               </p>
               <p>
-                I enjoy understanding the real problem behind a request,
-                creating a clear technical solution and documenting the work
-                so it can be maintained. I&apos;m especially interested in
-                useful web products, backend systems and technology that
-                addresses practical needs.
+                That mix means I can follow a problem past the surface, from a
+                user&apos;s screen to the network, the account or the app
+                behind it, and still explain the fix without jargon. I write
+                things down so the next person doesn&apos;t start from zero.
               </p>
               <a className="text-link" href="#contact">
-                Tell me what you&apos;re building <ArrowIcon />
+                Talk to me about your support team <ArrowIcon />
               </a>
             </div>
           </div>
           <div className="about-facts">
             <div>
               <span className="fact-number">03</span>
-              <span className="fact-label">YEAR OF STUDY</span>
+              <span className="fact-label">YEAR OF SOFTWARE ENGINEERING</span>
             </div>
             <div>
               <span className="fact-number">UZ</span>
               <span className="fact-label">UNIVERSITY OF ZIMBABWE</span>
             </div>
             <div>
-              <span className="fact-number">ZW</span>
-              <span className="fact-label">BASED IN HARARE</span>
+              <span className="fact-number">+2</span>
+              <span className="fact-label">UTC · HARARE TIME ZONE</span>
             </div>
             <div>
-              <span className="fact-number">11</span>
-              <span className="fact-label">SELECTED PROJECTS</span>
+              <span className="fact-number">{String(projects.length).padStart(2, '0')}</span>
+              <span className="fact-label">SHIPPED PROJECTS</span>
             </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="support-title" className="content-section support-section" id="support">
+          <div className="section-heading">
+            <p className="eyebrow">WHAT I CAN HELP WITH</p>
+            <span className="section-number">02 — SUPPORT</span>
+          </div>
+          <div className="skills-intro">
+            <h2 id="support-title">
+              The tickets
+              <br />
+              <span>I&apos;m ready for.</span>
+            </h2>
+            <p>
+              Everyday issues that stop people working, and the tools I use to
+              resolve them, on site or remotely.
+            </p>
+          </div>
+          <div className="support-grid">
+            {supportAreas.map((area, index) => (
+              <article className="support-card" key={area.code}>
+                <div className="support-card-top">
+                  <span>#{String(index + 1).padStart(2, '0')}</span>
+                  <span className="support-code">{area.code}</span>
+                </div>
+                <h3>{area.title}</h3>
+                <p>{area.description}</p>
+                <ul aria-label={`${area.title} tools`} className="tag-list">
+                  {area.tools.map((tool) => <li key={tool}>{tool}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="approach-title" className="content-section approach-section" id="approach">
+          <div className="section-heading">
+            <p className="eyebrow">HOW I WORK</p>
+            <span className="section-number">03 — APPROACH</span>
+          </div>
+          <div className="skills-intro">
+            <h2 id="approach-title">
+              Every ticket,
+              <br />
+              <span>start to finish.</span>
+            </h2>
+            <p>
+              A consistent process keeps users informed, avoids repeat issues
+              and makes handovers painless for the rest of the team.
+            </p>
+          </div>
+          <ol className="ticket-flow">
+            {ticketSteps.map((step, index) => (
+              <li key={step.title}>
+                <span className="ticket-step">STEP {String(index + 1).padStart(2, '0')}</span>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="remote-panel">
+            <div className="remote-panel-heading">
+              <span className="status-dot" />
+              <h3>Built for remote teams</h3>
+            </div>
+            <dl className="remote-notes">
+              {remoteNotes.map((note) => (
+                <div key={note.label}>
+                  <dt>{note.label}</dt>
+                  <dd>
+                    <strong>{note.value}</strong>
+                    <span>{note.detail}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        <section aria-labelledby="skills-title" className="content-section skills-section" id="skills">
+          <div className="section-heading">
+            <p className="eyebrow">TOOLS OF THE TRADE</p>
+            <span className="section-number">04 — TOOLKIT</span>
+          </div>
+          <div className="skills-intro">
+            <h2 id="skills-title">
+              Skills I bring
+              <br />
+              <span>to the desk.</span>
+            </h2>
+            <p>
+              Support fundamentals first, backed by development skills that
+              help me understand and fix the applications people rely on.
+            </p>
+          </div>
+          <div className="skills-list">
+            {skills.map((group) => (
+              <article className="skill-row" key={group.number}>
+                <span className="skill-number">{group.number}</span>
+                <div className="skill-title">
+                  <h3>{group.title}</h3>
+                  <p>{group.description}</p>
+                </div>
+                <ul className="tag-list skill-tags">
+                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </article>
+            ))}
           </div>
         </section>
 
         <section aria-labelledby="projects-title" className="content-section projects-section" id="projects">
           <div className="section-heading">
             <p className="eyebrow">SELECTED WORK</p>
-            <span className="section-number">02 — PROJECTS</span>
+            <span className="section-number">05 — PROJECTS</span>
           </div>
           <div className="projects-intro">
             <h2 id="projects-title">
-              Ideas turned into
+              Systems I&apos;ve built,
               <br />
-              <span>working software.</span>
+              <span>so I know how they break.</span>
             </h2>
             <p>
-              Selected applications and websites, with screenshots captured
-              from live deployments or directly from public repositories.
+              Building and deploying these applications taught me how
+              accounts, databases, APIs and hosting fit together, which is
+              exactly what you need when something stops working.
             </p>
           </div>
           <div className="project-grid">
@@ -550,12 +694,9 @@ function App() {
                     />
                   ) : (
                     <div className="project-image-missing">
-                      <span>SCREENSHOT UNAVAILABLE</span>
-                      <strong>No verified project image</strong>
+                      <span>NO PREVIEW</span>
+                      <strong>{project.name}</strong>
                     </div>
-                  )}
-                  {project.imageSource && (
-                    <span className="project-image-source">{project.imageSource}</span>
                   )}
                 </div>
                 <div className="project-content">
@@ -599,12 +740,6 @@ function App() {
               </article>
             ))}
           </div>
-          <p className="project-disclosure">
-            Images are screenshots from live apps and public GitHub projects,
-            or previews published on project sites. The Titfaz cover is a
-            labelled illustration because its site blocks reliable screenshot
-            access.
-          </p>
           <a
             className="text-link projects-github"
             href="https://github.com/Ekeneji21"
@@ -615,60 +750,42 @@ function App() {
           </a>
         </section>
 
-        <section aria-labelledby="skills-title" className="content-section skills-section" id="skills">
-          <div className="section-heading">
-            <p className="eyebrow">TOOLS OF THE TRADE</p>
-            <span className="section-number">03 — CAPABILITIES</span>
-          </div>
-          <div className="skills-intro">
-            <h2 id="skills-title">
-              Skills I bring
-              <br />
-              <span>to the work.</span>
-            </h2>
-            <p>
-              A broad, growing toolkit across software development and IT
-              systems. I focus on clear fundamentals and practical solutions.
-            </p>
-          </div>
-          <div className="skills-list">
-            {skills.map((group) => (
-              <article className="skill-row" key={group.number}>
-                <span className="skill-number">{group.number}</span>
-                <div className="skill-title">
-                  <h3>{group.title}</h3>
-                  <p>{group.description}</p>
-                </div>
-                <ul className="tag-list skill-tags">
-                  {group.items.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </article>
-            ))}
-          </div>
-          <p className="skills-note">
-            Skills are listed from my CV and supplied brief; no proficiency
-            ratings are implied.
-          </p>
-        </section>
-
         <section aria-labelledby="experience-title" className="content-section experience-section" id="experience">
           <div className="section-heading">
             <p className="eyebrow">EDUCATION &amp; EXPERIENCE</p>
-            <span className="section-number">04 — BACKGROUND</span>
+            <span className="section-number">06 — BACKGROUND</span>
           </div>
           <div className="experience-grid">
             <div>
               <h2 id="experience-title">
                 Learning by
                 <br />
-                <span>building and doing.</span>
+                <span>fixing and building.</span>
               </h2>
               <p className="experience-lede">
-                A software engineering education complemented by practical
-                systems support and project work.
+                A software engineering degree in progress, grounded in
+                practical systems support and real project work.
               </p>
             </div>
             <div className="timeline">
+              <article className="timeline-item">
+                <span className="timeline-date">PRACTICAL EXPERIENCE</span>
+                <h3>IT support &amp; systems</h3>
+                <p>
+                  Troubleshooting workplace systems and devices, supporting
+                  users with Windows and Microsoft 365, and configuring
+                  networks and printers.
+                </p>
+              </article>
+              <article className="timeline-item">
+                <span className="timeline-date">PROJECT WORK</span>
+                <h3>Full stack development &amp; deployment</h3>
+                <p>
+                  Building and deploying applications across healthcare,
+                  finance, agriculture and environmental technology, plus
+                  live business websites.
+                </p>
+              </article>
               <article className="timeline-item">
                 <span className="timeline-date">2023 — PRESENT · YEAR 3</span>
                 <h3>BSc Honours in Software Engineering</h3>
@@ -677,42 +794,32 @@ function App() {
                   {coursework.map((item) => <li key={item}>{item}</li>)}
                 </ul>
               </article>
-              <article className="timeline-item">
-                <span className="timeline-date">PRACTICAL EXPERIENCE</span>
-                <h3>IT support &amp; software projects</h3>
-                <p>
-                  Systems troubleshooting, user support and network
-                  configuration, alongside building and deploying application
-                  projects across healthcare, finance and environmental
-                  technology.
-                </p>
-              </article>
             </div>
           </div>
         </section>
 
-        <section aria-labelledby="services-title" className="content-section services-section" id="services">
+        <section aria-labelledby="roles-title" className="content-section services-section" id="roles">
           <div className="section-heading">
-            <p className="eyebrow">WAYS I CAN HELP</p>
-            <span className="section-number">05 — SERVICES</span>
+            <p className="eyebrow">WHERE I FIT</p>
+            <span className="section-number">07 — ROLES</span>
           </div>
           <div className="services-grid">
             <div>
-              <h2 id="services-title">
-                Let&apos;s solve
+              <h2 id="roles-title">
+                Roles I&apos;m
                 <br />
-                <span>a real problem.</span>
+                <span>looking for.</span>
               </h2>
               <p>
-                These are areas I&apos;m available to discuss for suitable
-                projects and opportunities—not a claim of prior client work.
+                Remote, full-time, part-time or contract. I&apos;m happy to
+                start with first-line support and grow with your team.
               </p>
             </div>
             <ul className="service-list">
-              {services.map((service, index) => (
-                <li key={service}>
+              {roles.map((role, index) => (
+                <li key={role}>
                   <span>{String(index + 1).padStart(2, '0')}</span>
-                  {service}
+                  {role}
                   <ArrowIcon />
                 </li>
               ))}
@@ -722,22 +829,22 @@ function App() {
 
         <section aria-labelledby="contact-title" className="contact-section" id="contact">
           <div className="contact-topline">
-            <span>HAVE A PROJECT OR OPPORTUNITY?</span>
+            <span>HIRING FOR REMOTE IT SUPPORT?</span>
             <span>HARARE, ZIMBABWE · UTC+2</span>
           </div>
           <div className="contact-grid">
             <div className="contact-copy">
               <p className="eyebrow">LET&apos;S CONNECT</p>
               <h2 id="contact-title">
-                Good work
+                Need someone
                 <br />
-                starts with
+                reliable on
                 <br />
-                <span>a conversation.</span>
+                <span>your help desk?</span>
               </h2>
               <p>
-                I&apos;m open to suitable remote opportunities, freelance
-                projects and software engineering roles.
+                I&apos;m open to remote help desk, IT support and technical
+                support roles, as well as freelance projects.
               </p>
               <a className="contact-email" href="mailto:gomoekeneji@gmail.com">
                 gomoekeneji@gmail.com <ArrowIcon />
@@ -748,7 +855,7 @@ function App() {
                 rel="noreferrer"
                 target="_blank"
               >
-                GitHub portfolio <ArrowIcon />
+                GitHub <ArrowIcon />
               </a>
               <a className="contact-phone" href="tel:+263783031650">
                 +263 78 303 1650
@@ -770,28 +877,27 @@ function App() {
                 id="contact-email"
                 maxLength={254}
                 name="email"
-                placeholder="you@example.com"
+                placeholder="you@company.com"
                 required
                 type="email"
               />
-              <label htmlFor="contact-message">What would you like to discuss?</label>
+              <label htmlFor="contact-message">Tell me about the role</label>
               <textarea
                 id="contact-message"
                 maxLength={4000}
                 name="message"
-                placeholder="A little about your project or opportunity..."
+                placeholder="Team, hours, tools and what support looks like day to day..."
                 required
                 rows={4}
               />
               <button className="button button-light" type="submit">
-                Create email draft <ArrowIcon />
+                Send via email <ArrowIcon />
               </button>
               <p aria-live="polite" className="form-status">
                 {contactStatus}
               </p>
               <p className="form-note">
-                This opens your email app with a draft; it does not send or
-                store your message on this website.
+                Opens a pre-filled draft in your email app.
               </p>
             </form>
           </div>
