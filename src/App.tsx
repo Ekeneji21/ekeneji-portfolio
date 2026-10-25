@@ -1,8 +1,12 @@
 import { useEffect, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react'
 import './App.css'
 import {
+  aiCodeSample,
+  aiPrinciples,
+  aiSupportUses,
   contact,
   coursework,
+  engineeringAreas,
   heroHighlights,
   heroRoles,
   navLinks,
@@ -18,8 +22,15 @@ import {
   ticketSteps,
   tools,
   type IconName,
-  type ProjectCategory,
+  type Project,
+  type ProjectFilter,
 } from './content'
+
+function matchesFilter(project: Project, filter: ProjectFilter) {
+  if (filter === 'all') return true
+  if (filter === 'ai') return Boolean(project.ai)
+  return project.category === filter
+}
 
 const currentYear = new Date().getFullYear()
 const HARARE_UTC_OFFSET = 2
@@ -39,7 +50,32 @@ const iconPaths: Record<IconName, ReactNode> = {
       <path d="M12 7v5l3 2" />
     </>
   ),
+  cloud: <path d="M7 18a4 4 0 0 1-.6-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1 0 9Z" />,
   code: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />,
+  database: (
+    <>
+      <ellipse cx="12" cy="6" rx="8" ry="3" />
+      <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+    </>
+  ),
+  phone: (
+    <>
+      <rect height="20" rx="2.5" width="11" x="6.5" y="2" />
+      <path d="M11 18h2" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z" />
+      <path d="m9 12 2 2 4-4" />
+    </>
+  ),
+  sparkles: (
+    <>
+      <path d="m12 3 1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8Z" />
+      <path d="m19 15 .9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9Z" />
+    </>
+  ),
   copy: (
     <>
       <rect height="11" rx="2" width="11" x="9" y="9" />
@@ -122,16 +158,13 @@ function App() {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const [roleIndex, setRoleIndex] = useState(0)
-  const [projectFilter, setProjectFilter] = useState<'all' | ProjectCategory>('all')
+  const [projectFilter, setProjectFilter] = useState<ProjectFilter>('all')
   const [copied, setCopied] = useState(false)
   const [contactStatus, setContactStatus] = useState('')
   const [theme, toggleTheme] = useTheme()
   const clock = useHarareClock()
 
-  const visibleProjects =
-    projectFilter === 'all'
-      ? projects
-      : projects.filter((project) => project.category === projectFilter)
+  const visibleProjects = projects.filter((project) => matchesFilter(project, projectFilter))
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -615,11 +648,95 @@ function App() {
           </div>
         </section>
 
+        <section aria-labelledby="engineering-title" className="section section-dark" id="engineering">
+          <div aria-hidden="true" className="engineering-glow" />
+          <div className="container">
+            <div className="section-head section-head-split" data-reveal>
+              <div>
+                <p className="eyebrow eyebrow-light">06 · Engineering &amp; AI</p>
+                <h2 id="engineering-title">
+                  I build apps, <span className="gradient-text">and make them smarter.</span>
+                </h2>
+              </div>
+              <p>
+                Alongside support, I design, build and deploy full stack
+                applications, including AI features that help people make
+                faster, safer decisions.
+              </p>
+            </div>
+
+            <div className="engineering-grid">
+              {engineeringAreas.map((area) => (
+                <article className="engineering-card" data-reveal key={area.title}>
+                  <span className="engineering-icon">
+                    <Icon name={area.icon} />
+                  </span>
+                  <h3>{area.title}</h3>
+                  <p>{area.description}</p>
+                  <ul aria-label={`${area.title} skills`} className="tag-list">
+                    {area.tags.map((tag) => (
+                      <li key={tag}>{tag}</li>
+                    ))}
+                  </ul>
+                  <p className="engineering-proof">
+                    <span>Seen in</span> {area.proof}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="ai-grid">
+              <figure className="code-window" data-reveal>
+                <div className="code-window-bar">
+                  <span aria-hidden="true" className="code-dots">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  <span>ai-check.ts</span>
+                </div>
+                <pre>
+                  <code>{aiCodeSample}</code>
+                </pre>
+                <figcaption>
+                  An illustrative pattern from my healthcare work: the AI flags
+                  risks, and low-confidence results go to a person.
+                </figcaption>
+              </figure>
+
+              <div className="ai-panel" data-reveal>
+                <h3>
+                  <Icon name="sparkles" /> How I use AI responsibly
+                </h3>
+                <ol className="ai-principles">
+                  {aiPrinciples.map((principle, index) => (
+                    <li key={principle.title}>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <div>
+                        <strong>{principle.title}</strong>
+                        <p>{principle.description}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <div className="ai-support">
+                  <p>Where AI can help a support team</p>
+                  <ul className="tag-list">
+                    {aiSupportUses.map((use) => (
+                      <li key={use}>{use}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section aria-labelledby="projects-title" className="section section-tinted" id="projects">
           <div className="container">
             <div className="section-head section-head-split" data-reveal>
               <div>
-                <p className="eyebrow">06 · Projects</p>
+                <p className="eyebrow">07 · Projects</p>
                 <h2 id="projects-title">
                   Systems I&apos;ve built, <span className="muted-heading">so I know how they break.</span>
                 </h2>
@@ -640,11 +757,7 @@ function App() {
                   type="button"
                 >
                   {filter.label}
-                  <span>
-                    {filter.id === 'all'
-                      ? projects.length
-                      : projects.filter((project) => project.category === filter.id).length}
-                  </span>
+                  <span>{projects.filter((project) => matchesFilter(project, filter.id)).length}</span>
                 </button>
               ))}
             </div>
@@ -660,6 +773,11 @@ function App() {
                       />
                     )}
                     <span className="project-note">{project.note}</span>
+                    {project.ai && (
+                      <span className="project-ai">
+                        <Icon name="sparkles" /> AI
+                      </span>
+                    )}
                   </div>
                   <div className="project-content">
                     <p className="project-type">{project.type}</p>
@@ -697,7 +815,7 @@ function App() {
         <section aria-labelledby="experience-title" className="section" id="experience">
           <div className="container experience-grid">
             <div data-reveal>
-              <p className="eyebrow">07 · Background</p>
+              <p className="eyebrow">08 · Background</p>
               <h2 id="experience-title">
                 Learning by <span className="muted-heading">fixing and building.</span>
               </h2>
@@ -742,7 +860,7 @@ function App() {
         <section aria-labelledby="roles-title" className="section section-tinted" id="roles">
           <div className="container roles-grid">
             <div data-reveal>
-              <p className="eyebrow">08 · Where I fit</p>
+              <p className="eyebrow">09 · Where I fit</p>
               <h2 id="roles-title">
                 Roles I&apos;m <span className="muted-heading">looking for.</span>
               </h2>

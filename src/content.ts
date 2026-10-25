@@ -13,18 +13,26 @@ export type Project = {
   repoLabel?: string
   image?: string
   imageAlt?: string
+  ai?: boolean
 }
+
+export type ProjectFilter = 'all' | ProjectCategory | 'ai'
 
 export type IconName =
   | 'arrow'
   | 'check'
   | 'chat'
   | 'clock'
+  | 'cloud'
   | 'code'
   | 'copy'
+  | 'database'
   | 'headset'
   | 'monitor'
   | 'moon'
+  | 'phone'
+  | 'shield'
+  | 'sparkles'
   | 'sun'
 
 export const contact = {
@@ -41,6 +49,7 @@ export const navLinks = [
   { id: 'services', label: 'Services' },
   { id: 'client-care', label: 'Client care' },
   { id: 'skills', label: 'Toolkit' },
+  { id: 'engineering', label: 'Engineering & AI' },
   { id: 'projects', label: 'Projects' },
 ]
 
@@ -73,6 +82,7 @@ export const tools = [
   'React & TypeScript',
   'Node.js',
   'PostgreSQL',
+  'AI integration',
 ]
 
 export const pillars: {
@@ -125,6 +135,103 @@ export const pillars: {
       'Deploying to Vercel and Netlify',
     ],
   },
+]
+
+export const engineeringAreas: {
+  icon: IconName
+  title: string
+  description: string
+  tags: string[]
+  proof: string
+}[] = [
+  {
+    icon: 'sparkles',
+    title: 'AI integration',
+    description:
+      'Adding AI features to real products, from AI-assisted safety checks to data-driven scoring, with a person always able to review the result.',
+    tags: ['AI APIs', 'Python', 'Data-driven scoring', 'Human review'],
+    proof: 'MediPrescribe · AI Credit Scoring',
+  },
+  {
+    icon: 'code',
+    title: 'Full stack web apps',
+    description:
+      'Responsive front ends in React and TypeScript, backed by Node.js services and REST APIs.',
+    tags: ['React.js', 'TypeScript', 'Node.js', 'REST APIs'],
+    proof: 'MediPrescribe · CrestMart · Agrotek19',
+  },
+  {
+    icon: 'database',
+    title: 'Data & databases',
+    description:
+      'Designing schemas, writing SQL and modelling data so applications stay fast and reports stay accurate.',
+    tags: ['PostgreSQL', 'MySQL', 'Data modelling', 'SQL'],
+    proof: 'AI Credit Scoring · MediPrescribe',
+  },
+  {
+    icon: 'shield',
+    title: 'Security & access',
+    description:
+      'Sign-in, role-based permissions and audit trails, so the right people see the right data.',
+    tags: ['JWT authentication', 'Role-based access', 'Audit trails'],
+    proof: 'MediPrescribe & MediScribe',
+  },
+  {
+    icon: 'cloud',
+    title: 'Deployment & hosting',
+    description:
+      'Shipping to the web and keeping it running: builds, environments, domains and DNS.',
+    tags: ['Vercel', 'Netlify', 'DNS & domains', 'Git & GitHub'],
+    proof: 'Crestline Systems · this portfolio',
+  },
+  {
+    icon: 'phone',
+    title: 'Mobile & more languages',
+    description:
+      'Beyond the web stack, I also work in Flutter for mobile and in Java, C# and Python.',
+    tags: ['Flutter', 'Java', 'C#', 'Python'],
+    proof: 'BSc Software Engineering coursework',
+  },
+]
+
+export const aiCodeSample = `// Illustrative example: AI assists, a person decides
+async function checkPrescription(rx: Prescription) {
+  const result = await ai.analyse({
+    task: 'drug-interaction-check',
+    medicines: rx.medicines,
+  })
+
+  return {
+    warnings: result.warnings,
+    // Low confidence? Route to a clinician first.
+    needsReview: result.confidence < 0.9,
+  }
+}`
+
+export const aiPrinciples = [
+  {
+    title: 'AI assists, people decide',
+    description:
+      'AI drafts, flags and suggests. A person reviews anything that affects a user, patient or customer.',
+  },
+  {
+    title: 'Private data stays private',
+    description:
+      'Only the data a feature truly needs is sent to an AI service, and never passwords or personal records.',
+  },
+  {
+    title: 'Test it like any other code',
+    description:
+      'Check AI output against real cases, be honest about confidence and fall back gracefully when unsure.',
+  },
+]
+
+export const aiSupportUses = [
+  'Ticket summaries',
+  'Suggested replies',
+  'Smart triage & routing',
+  'Knowledge-base search',
+  'Draft how-to guides',
 ]
 
 export const supportAreas = [
@@ -306,6 +413,7 @@ export const skills = [
     title: 'Software engineering',
     description: 'Building, deploying and supporting full stack web applications.',
     items: [
+      'AI API integration',
       'JavaScript',
       'TypeScript',
       'React.js',
@@ -352,6 +460,7 @@ export const projects: Project[] = [
     image: '/projects/mediprescribe.jpg',
     imageAlt: 'Screenshot of the MediPrescribe patient dashboard',
     note: 'Live demo',
+    ai: true,
   },
   {
     name: 'Crestline Systems',
@@ -391,6 +500,7 @@ export const projects: Project[] = [
     image: '/projects/credit-scoring-live.png',
     imageAlt: 'Screenshot of the Pamoja AI credit scoring dashboard',
     note: 'Live demo',
+    ai: true,
   },
   {
     name: 'CrestMart',
@@ -471,8 +581,9 @@ export const projects: Project[] = [
   },
 ]
 
-export const projectFilters: { id: 'all' | ProjectCategory; label: string }[] = [
+export const projectFilters: { id: ProjectFilter; label: string }[] = [
   { id: 'all', label: 'All work' },
+  { id: 'ai', label: 'AI-powered' },
   { id: 'app', label: 'Applications' },
   { id: 'website', label: 'Business websites' },
 ]
