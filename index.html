@@ -6,17 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Ekeneji Tanaka Gomo is a remote IT support and help desk professional in Harare, Zimbabwe (UTC+2), with Windows, Microsoft 365, Active Directory, networking and full stack development skills."
+      content="Ekeneji Tanaka Gomo: remote help desk, IT support and client services in Harare, Zimbabwe (UTC+2). Windows, Microsoft 365, Active Directory, networking and plain-language support."
     />
-    <meta name="theme-color" content="#f3f6fb" />
+    <meta name="theme-color" content="#f6f8fc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#070f1c" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ekeneji Tanaka Gomo — IT Support &amp; Help Desk" />
+    <meta property="og:title" content="Ekeneji Tanaka Gomo — Help Desk, IT Support &amp; Client Services" />
     <meta
       property="og:description"
-      content="Remote IT support and help desk: Windows, Microsoft 365, Active Directory, networking and web application support. Harare, Zimbabwe (UTC+2)."
+      content="Remote help desk, IT support and client services: Windows, Microsoft 365, Active Directory, networking and friendly, plain-language support. Harare, Zimbabwe (UTC+2)."
     />
     <meta name="twitter:card" content="summary" />
-    <title>Ekeneji Tanaka Gomo — IT Support &amp; Help Desk</title>
+    <title>Ekeneji Tanaka Gomo — Help Desk, IT Support &amp; Client Services</title>
+    <script>
+      // Apply the saved or system theme before first paint to avoid a flash.
+      ;(function () {
+        var theme
+        try {
+          theme = localStorage.getItem('theme')
+        } catch (error) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
