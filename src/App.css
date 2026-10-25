@@ -773,7 +773,7 @@ h2 {
 
 .pillar-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -1782,13 +1782,8 @@ h2 {
     align-items: flex-start;
   }
 
-  .pillar-grid,
   .support-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .pillar-card:last-child {
-    grid-column: 1 / -1;
   }
 }
 

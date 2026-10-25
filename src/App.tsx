@@ -39,6 +39,7 @@ const iconPaths: Record<IconName, ReactNode> = {
       <path d="M12 7v5l3 2" />
     </>
   ),
+  code: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />,
   copy: (
     <>
       <rect height="11" rx="2" width="11" x="9" y="9" />
@@ -303,8 +304,9 @@ function App() {
               <p className="hero-intro">
                 I help people get back to work: troubleshooting Windows and
                 Microsoft 365, sorting out accounts, networks and devices, and
-                explaining every fix in plain language. Software engineering
-                student in Harare, supporting teams remotely across UK and
+                explaining every fix in plain language. I&apos;m also a
+                software engineering student who builds and deploys full stack
+                web apps, supporting teams remotely from Harare across UK and
                 European hours.
               </p>
               <div className="hero-actions">
@@ -339,7 +341,7 @@ function App() {
                 />
                 <div aria-hidden="true" className="portrait-shade" />
                 <div className="portrait-caption">
-                  <span>HELP DESK · IT SUPPORT · CLIENT SERVICES</span>
+                  <span>IT SUPPORT · CLIENT SERVICES · SOFTWARE ENGINEERING</span>
                   <strong>Calm, clear fixes that get people back to work.</strong>
                 </div>
               </div>
@@ -433,13 +435,13 @@ function App() {
               <div>
                 <p className="eyebrow">02 · Services</p>
                 <h2 id="services-title">
-                  Three roles, <span className="muted-heading">one goal.</span>
+                  Four strengths, <span className="muted-heading">one goal.</span>
                 </h2>
               </div>
               <p>
                 Whether it&apos;s the first reply on the help desk, a hands-on
-                fix or keeping a client happy, the aim is the same: the person
-                gets back to work and feels looked after.
+                fix, keeping a client happy or building the app itself, the aim
+                is the same: technology that works for the people using it.
               </p>
             </div>
             <div className="pillar-grid">
@@ -592,9 +594,9 @@ function App() {
                 </h2>
               </div>
               <p>
-                Support and people skills first, backed by development
-                experience that helps me understand and fix the applications
-                people rely on.
+                Support and people skills, plus real software engineering:
+                I can build applications as well as fix the ones people rely
+                on.
               </p>
             </div>
             <div className="skills-grid">

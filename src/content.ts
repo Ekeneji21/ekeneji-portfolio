@@ -20,6 +20,7 @@ export type IconName =
   | 'check'
   | 'chat'
   | 'clock'
+  | 'code'
   | 'copy'
   | 'headset'
   | 'monitor'
@@ -47,6 +48,7 @@ export const heroRoles = [
   'help desk analyst',
   'IT support technician',
   'client services specialist',
+  'full stack developer',
 ]
 
 export const heroHighlights = [
@@ -68,6 +70,9 @@ export const tools = [
   'Printers',
   'Backup & recovery',
   'Antivirus tools',
+  'React & TypeScript',
+  'Node.js',
+  'PostgreSQL',
 ]
 
 export const pillars: {
@@ -107,6 +112,17 @@ export const pillars: {
       'Clear expectations and regular updates',
       'Calm with frustrated or urgent users',
       'How-to guides and new-user onboarding',
+    ],
+  },
+  {
+    icon: 'code',
+    title: 'Software engineering',
+    summary: 'Full stack apps built, deployed and kept running.',
+    points: [
+      'React, TypeScript and Node.js',
+      'REST APIs and PostgreSQL / MySQL',
+      'Authentication and role-based access',
+      'Deploying to Vercel and Netlify',
     ],
   },
 ]
@@ -287,8 +303,8 @@ export const skills = [
     ],
   },
   {
-    title: 'Web & application support',
-    description: 'Enough development depth to support and fix business apps.',
+    title: 'Software engineering',
+    description: 'Building, deploying and supporting full stack web applications.',
     items: [
       'JavaScript',
       'TypeScript',
@@ -469,6 +485,7 @@ export const roles = [
   'Microsoft 365 support',
   'Desktop & end-user support',
   'Junior systems or network support',
+  'Junior software / full stack developer',
   'Freelance website maintenance & fixes',
 ]
 
