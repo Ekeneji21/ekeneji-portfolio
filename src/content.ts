@@ -40,6 +40,7 @@ export const contact = {
   phone: '+263 78 303 1650',
   phoneHref: 'tel:+263783031650',
   github: 'https://github.com/Ekeneji21',
+  linkedin: 'https://www.linkedin.com/in/ekeneji-gomo-26088b336',
   location: 'Harare, Zimbabwe',
   cv: '/ekeneji-cv-preview.png',
 }

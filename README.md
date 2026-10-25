@@ -20,5 +20,6 @@ npm run lint
 
 - Update contact details, services, support areas, client-care principles, the sample chat, skills, projects, roles and coursework in `src/content.ts`.
 - The "View CV" button opens `public/ekeneji-cv-preview.png`. Replace it with a PDF and update the link when one is available.
-- The contact form validates the fields in the browser and creates a draft in the visitor's email application. It does not send or store messages on a server.
+- The contact form sends messages to the email in `src/content.ts` through FormSubmit (formsubmit.co). FormSubmit emails an activation link after the first submission, and the form falls back to a pre-filled email draft if sending fails.
+- `public/og-image.png` is the link-preview image used by LinkedIn, WhatsApp and search engines.
 - Project images live in `public/projects/`. The Titfaz Construction cover is an illustration, and the card has no link while titfazconstruction.co.zw is offline.

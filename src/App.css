@@ -734,7 +734,10 @@ h2 {
   line-height: 1.75;
 }
 
-.about-copy .text-link {
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
   margin-top: 8px;
 }
 
@@ -1904,6 +1907,20 @@ h2 {
 
 .contact-form .button-primary {
   margin-top: 4px;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.contact-form .button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
 }
 
 .form-status {

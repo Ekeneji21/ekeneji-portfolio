@@ -161,6 +161,7 @@ function App() {
   const [projectFilter, setProjectFilter] = useState<ProjectFilter>('all')
   const [copied, setCopied] = useState(false)
   const [contactStatus, setContactStatus] = useState('')
+  const [sending, setSending] = useState(false)
   const [theme, toggleTheme] = useTheme()
   const clock = useHarareClock()
 
@@ -240,22 +241,41 @@ function App() {
     }
   }
 
-  function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
+    const formElement = event.currentTarget
+    const form = new FormData(formElement)
+    if (form.get('_honey')) return
     const name = String(form.get('name') ?? '').trim()
     const email = String(form.get('email') ?? '').trim()
     const company = String(form.get('company') ?? '').trim()
     const message = String(form.get('message') ?? '').trim()
-    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`)
-    const body = encodeURIComponent(
-      `Name: ${name}\nReply email: ${email}${company ? `\nCompany: ${company}` : ''}\n\n${message}`,
-    )
+    const subject = `Portfolio enquiry from ${name}`
 
-    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`
-    setContactStatus(
-      `Your email app should open with this message as a draft. If nothing opens, email me directly at ${contact.email}.`,
-    )
+    setSending(true)
+    setContactStatus('Sending your message…')
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${contact.email}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, company, message, _subject: subject, _template: 'table' }),
+      })
+      const result = (await response.json()) as { success?: boolean | string }
+      if (!response.ok || String(result.success) !== 'true') throw new Error('Not delivered')
+      formElement.reset()
+      setContactStatus(`Thanks ${name}, your message has been sent. I’ll reply to ${email} soon.`)
+    } catch {
+      // Fall back to the visitor's email app so the message is never lost.
+      const body = encodeURIComponent(
+        `Name: ${name}\nReply email: ${email}${company ? `\nCompany: ${company}` : ''}\n\n${message}`,
+      )
+      window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${body}`
+      setContactStatus(
+        `The form couldn’t send just now, so your email app should open with the message ready. You can also email ${contact.email} directly.`,
+      )
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -436,9 +456,14 @@ function App() {
                   just a ticket number, and I write things down so the next
                   person doesn&apos;t start from zero.
                 </p>
-                <a className="text-link" href="#contact">
-                  Talk to me about your support team <Icon name="arrow" />
-                </a>
+                <div className="about-links">
+                  <a className="text-link" href="#contact">
+                    Talk to me about your support team <Icon name="arrow" />
+                  </a>
+                  <a className="text-link" href={contact.linkedin} rel="noreferrer" target="_blank">
+                    View my LinkedIn <Icon name="arrow" />
+                  </a>
+                </div>
               </div>
               <dl className="about-facts" data-reveal>
                 <div>
@@ -913,6 +938,12 @@ function App() {
                     <a href={contact.phoneHref}>{contact.phone}</a>
                   </li>
                   <li>
+                    <span>LinkedIn</span>
+                    <a href={contact.linkedin} rel="noreferrer" target="_blank">
+                      linkedin.com/in/ekeneji-gomo
+                    </a>
+                  </li>
+                  <li>
                     <span>GitHub</span>
                     <a href={contact.github} rel="noreferrer" target="_blank">
                       github.com/Ekeneji21
@@ -959,13 +990,21 @@ function App() {
                     rows={5}
                   />
                 </label>
-                <button className="button button-primary button-block" type="submit">
-                  Send via email <Icon name="arrow" />
+                <input
+                  aria-hidden="true"
+                  autoComplete="off"
+                  className="honeypot"
+                  name="_honey"
+                  tabIndex={-1}
+                  type="text"
+                />
+                <button className="button button-primary button-block" disabled={sending} type="submit">
+                  {sending ? 'Sending…' : 'Send message'} <Icon name="arrow" />
                 </button>
                 <p aria-live="polite" className="form-status">
                   {contactStatus}
                 </p>
-                <p className="form-note">Opens a pre-filled draft in your email app.</p>
+                <p className="form-note">Goes straight to my inbox. I usually reply within a day.</p>
               </form>
             </div>
           </div>
@@ -979,6 +1018,9 @@ function App() {
             <span>© {currentYear} Ekeneji Tanaka Gomo</span>
           </a>
           <div className="footer-links">
+            <a href={contact.linkedin} rel="noreferrer" target="_blank">
+              LinkedIn
+            </a>
             <a href={contact.github} rel="noreferrer" target="_blank">
               GitHub
             </a>
